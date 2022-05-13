@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const categorySchema = new Schema({
+const brandSchema = new Schema({
     name: { type: String, required: true },
     genre: { type: String, required: true },
     products: [
@@ -13,6 +13,6 @@ const categorySchema = new Schema({
     ],
 });
 
-const Category = mongoose.model("Category", categorySchema);
+const Brand = mongoose.model("Brand", brandSchema);
 
-export { Category };
+export { Brand };

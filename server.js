@@ -5,6 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import { homeRouter } from "./api/routes/home.router.js";
+import { productListRouter } from "./api/routes/product-list.router.js";
+import { productDetailRouter } from "./api/routes/product-detail.router.js";
 
 dotenv.config();
 const server = express();
@@ -37,6 +39,8 @@ server.use(
 );
 
 server.use("/home", homeRouter);
+server.use("/products", productListRouter);
+server.use("/product", productDetailRouter);
 
 // Errors
 server.use("*", (req, res, next) => {

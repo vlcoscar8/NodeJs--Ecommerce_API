@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { Category } from "../api/models/categories.schema.js";
+import { Brand } from "../api/models/brand.schema.js";
 import { Product } from "../api/models/product.schema.js";
 import { Genre } from "../api/models/genre.schema.js";
 import { Shop } from "../api/models/shop.schema.js";
@@ -31,24 +31,44 @@ const genres = [
     },
 ];
 
-const categories = [
+const brands = [
     {
-        name: "Shoes",
+        name: "Nike",
         genre: "Man",
         products: [],
     },
     {
-        name: "Tshirts",
+        name: "Adidas",
         genre: "Man",
         products: [],
     },
     {
-        name: "Shoes",
+        name: "Puma",
+        genre: "Man",
+        products: [],
+    },
+    {
+        name: "Reebok",
+        genre: "Man",
+        products: [],
+    },
+    {
+        name: "Nike",
         genre: "Woman",
         products: [],
     },
     {
-        name: "Tshirts",
+        name: "Adidas",
+        genre: "Woman",
+        products: [],
+    },
+    {
+        name: "Puma",
+        genre: "Woman",
+        products: [],
+    },
+    {
+        name: "Reebok",
         genre: "Woman",
         products: [],
     },
@@ -58,7 +78,7 @@ const shopDoc = shop.map((shop) => new Shop(shop));
 
 const genresDoc = genres.map((genre) => new Genre(genre));
 
-const categoriesDoc = categories.map((category) => new Category(category));
+const brandsDoc = brands.map((brnd) => new Brand(brnd));
 
 const productsDoc = products.map((product) => new Product(product));
 
@@ -73,7 +93,7 @@ const creationSeed = mongoose
     .then(async () => {
         await createCollections();
         await insertGenresOnShop();
-        await insertCategoriesOnGenre();
+        await insertBrandsOnGenre();
         await insertProductOnCategories();
     })
     .catch((err) => {
@@ -90,8 +110,8 @@ const createCollections = async () => {
     await Genre.collection.drop();
     await Genre.insertMany(genresDoc);
 
-    await Category.collection.drop();
-    await Category.insertMany(categoriesDoc);
+    await Brand.collection.drop();
+    await Brand.insertMany(brandsDoc);
 
     await Product.collection.drop();
     await Product.insertMany(productsDoc);
@@ -111,30 +131,30 @@ const insertGenresOnShop = async () => {
     );
 };
 
-const insertCategoriesOnGenre = async () => {
-    const categories = await Category.find();
-    const manCategories = categories.filter((cat) => cat.genre === "Man");
-    const womanCategories = categories.filter((cat) => cat.genre === "Woman");
+const insertBrandsOnGenre = async () => {
+    const brands = await Brand.find();
+    const manBrands = brands.filter((brnd) => brnd.genre === "Man");
+    const womanBrands = brands.filter((brnd) => brnd.genre === "Woman");
 
-    manCategories.forEach(
-        async (cat) =>
+    manBrands.forEach(
+        async (brnd) =>
             await Genre.findOneAndUpdate(
-                { genre: cat.genre },
+                { genre: brnd.genre },
                 {
                     $push: {
-                        categories: cat,
+                        brands: brnd,
                     },
                 }
             )
     );
 
-    womanCategories.forEach(
-        async (cat) =>
+    womanBrands.forEach(
+        async (brnd) =>
             await Genre.findOneAndUpdate(
-                { genre: cat.genre },
+                { genre: brnd.genre },
                 {
                     $push: {
-                        categories: cat,
+                        brands: brnd,
                     },
                 }
             )
@@ -146,8 +166,8 @@ const insertProductOnCategories = async () => {
 
     products.forEach(
         async (pro) =>
-            await Category.findOneAndUpdate(
-                { genre: pro.genre, name: pro.category },
+            await Brand.findOneAndUpdate(
+                { genre: pro.genre, name: pro.brand },
                 {
                     $push: {
                         products: pro,

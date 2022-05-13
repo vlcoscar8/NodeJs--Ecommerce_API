@@ -12,25 +12,25 @@ const shopSchema = new Schema({
     lastBuys: [
         {
             type: Schema.Types.ObjectId,
-            ref: "LastBuys",
+            ref: "Product",
         },
     ],
     lastFavourites: [
         {
             types: Schema.Types.ObjectId,
-            ref: "lastFavourites",
+            ref: "Product",
         },
     ],
     mostValuated: [
         {
             types: Schema.Types.ObjectId,
-            ref: "mostValuated",
+            ref: "Product",
         },
     ],
     mostCommented: [
         {
             types: Schema.Types.ObjectId,
-            ref: "mostCommented",
+            ref: "Product",
         },
     ],
 });

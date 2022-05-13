@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const categoriesSchema = new Schema({
+const categorySchema = new Schema({
     name: { type: String, required: true },
     products: [
         {
@@ -12,6 +12,6 @@ const categoriesSchema = new Schema({
     ],
 });
 
-const Categories = mongoose.model("Categories", categoriesSchema);
+const Category = mongoose.model("Category", categorySchema);
 
-export { Categories };
+export { Category };

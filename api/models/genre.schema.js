@@ -7,7 +7,7 @@ const genreSchema = new Schema({
     categories: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Categories",
+            ref: "Category",
         },
     ],
 });

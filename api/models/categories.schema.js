@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const categorySchema = new Schema({
     name: { type: String, required: true },
+    genre: { type: String, required: true },
     products: [
         {
             type: Schema.Types.ObjectId,

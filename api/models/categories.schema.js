@@ -3,25 +3,8 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const categoriesSchema = new Schema({
-    shoes: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Product",
-        },
-    ],
-    tshirts: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Product",
-        },
-    ],
-    hoods: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Product",
-        },
-    ],
-    trausers: [
+    name: { type: String, required: true },
+    products: [
         {
             type: Schema.Types.ObjectId,
             ref: "Product",

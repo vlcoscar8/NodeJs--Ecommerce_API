@@ -11,13 +11,8 @@ const productSchema = new Schema({
     img: { type: String, required: true },
     description: { type: String, required: true },
     units: { type: Number, required: true },
-    sizes: { type: Number, required: true },
-    stars: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Stars",
-        },
-    ],
+    sizes: { type: String, required: true },
+    value: { type: Number, required: true },
     comments: [
         {
             type: Schema.Types.ObjectId,

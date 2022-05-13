@@ -15,21 +15,15 @@ const shopSchema = new Schema({
             ref: "Product",
         },
     ],
-    lastFavourites: [
-        {
-            types: Schema.Types.ObjectId,
-            ref: "Product",
-        },
-    ],
     mostValuated: [
         {
-            types: Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Product",
         },
     ],
     mostCommented: [
         {
-            types: Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Product",
         },
     ],

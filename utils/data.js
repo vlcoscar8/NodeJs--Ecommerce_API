@@ -2,7 +2,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Man",
-        category: "Shoes",
         title: "Nike React Infinity Run Flyknit 3",
         price: 160,
         img: [
@@ -19,7 +18,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Man",
-        category: "Shoes",
         title: "Nike Air Zoom Pegasus 39",
         price: 120,
         img: [
@@ -36,7 +34,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Man",
-        category: "Shoes",
         title: "Nike Winflo 8",
         price: 99,
         img: [
@@ -53,7 +50,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Man",
-        category: "Shoes",
         title: "Nike Zoom Alphafly Next Nature",
         price: 299,
         img: [
@@ -70,7 +66,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Man",
-        category: "Shoes",
         title: "Nike ZoomX Vaporfly Next% 2",
         price: 249,
         img: [
@@ -87,7 +82,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatilla Gazelle",
         price: 95,
         img: [
@@ -104,7 +98,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatilla Adizero adios 6",
         price: 130,
         img: [
@@ -121,7 +114,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatilla Retropy F2",
         price: 100,
         img: [
@@ -138,7 +130,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatilla Ultraboost 5.0 DNA",
         price: 180,
         img: [
@@ -155,7 +146,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatilla Superstar",
         price: 100,
         img: [
@@ -172,7 +162,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatillas CA Pro Classic",
         price: 90,
         img: [
@@ -189,7 +178,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatillas Mirage Sport Tech",
         price: 90,
         img: [
@@ -206,7 +194,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatillas City Rider Moulded",
         price: 90,
         img: [
@@ -223,7 +210,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatillas Future Rider Play On",
         price: 95,
         img: [
@@ -240,7 +226,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Man",
-        category: "Shoes",
         title: "Zapatillas RS-Fast Limiter",
         price: 110,
         img: [
@@ -257,7 +242,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Man",
-        category: "Shoes",
         title: "Classic Leather",
         price: 90,
         img: [
@@ -274,7 +258,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Man",
-        category: "Shoes",
         title: "Floatride Energy Grow",
         price: 120,
         img: [
@@ -291,7 +274,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Man",
-        category: "Shoes",
         title: "Reebok Nano X2",
         price: 130,
         img: [
@@ -308,7 +290,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Man",
-        category: "Shoes",
         title: "Classic Leather Legacy",
         price: 90,
         img: [
@@ -325,7 +306,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Man",
-        category: "Shoes",
         title: "Club C 85",
         price: 90,
         img: [
@@ -342,7 +322,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Woman",
-        category: "Shoes",
         title: "Nike Zoom Alphafly Next Nature",
         price: 290,
         img: [
@@ -359,7 +338,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Woman",
-        category: "Shoes",
         title: "Nike Metcon 7",
         price: 127,
         img: [
@@ -376,7 +354,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Woman",
-        category: "Shoes",
         title: "Air Force 1 Low - Be Kind",
         price: 129,
         img: [
@@ -393,7 +370,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Woman",
-        category: "Shoes",
         title: "Nike Air Max Dawn",
         price: 114,
         img: [
@@ -410,7 +386,6 @@ const data = [
     {
         brand: "Nike",
         genre: "Woman",
-        category: "Shoes",
         title: "Nike Air Max 270",
         price: 149,
         img: [
@@ -427,7 +402,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Woman",
-        category: "Shoes",
         title: "Zapatilla Ultraboost 22",
         price: 180,
         img: [
@@ -444,7 +418,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Woman",
-        category: "Shoes",
         title: "Zapatilla ZX 2K Boost 2.0",
         price: 140,
         img: [
@@ -461,7 +434,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Woman",
-        category: "Shoes",
         title: "Zapatilla Ozweego",
         price: 120,
         img: [
@@ -478,7 +450,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Woman",
-        category: "Shoes",
         title: "Zapatilla Retropy P9",
         price: 160,
         img: [
@@ -495,7 +466,6 @@ const data = [
     {
         brand: "Adidas",
         genre: "Woman",
-        category: "Shoes",
         title: "Zapatilla Solarglide 5",
         price: 140,
         img: [
@@ -512,7 +482,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Woman",
-        category: "Shoes",
         title: "Cruise Rider Tumbled VG",
         price: 100,
         img: [
@@ -529,7 +498,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Woman",
-        category: "Shoes",
         title: "Suede Mayu Raw",
         price: 110,
         img: [
@@ -546,7 +514,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Woman",
-        category: "Shoes",
         title: "Future Rider Displaced",
         price: 90,
         img: [
@@ -563,7 +530,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Woman",
-        category: "Shoes",
         title: "Cruise Rider",
         price: 69,
         img: [
@@ -580,7 +546,6 @@ const data = [
     {
         brand: "Puma",
         genre: "Woman",
-        category: "Shoes",
         title: "Suede Mayu",
         price: 100,
         img: [
@@ -597,7 +562,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Woman",
-        category: "Shoes",
         title: "Classic Leather",
         price: 90,
         img: [
@@ -614,7 +578,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Woman",
-        category: "Shoes",
         title: "Club C Clean",
         price: 110,
         img: [
@@ -631,7 +594,6 @@ const data = [
     {
         brand: "Reebok",
         genre: "Woman",
-        category: "Shoes",
         title: "Nano X1 Adventure",
         price: 130,
         img: [
@@ -648,16 +610,31 @@ const data = [
     {
         brand: "Reebok",
         genre: "Woman",
-        category: "Shoes",
-        title: "Nano X1 Adventure",
-        price: 130,
+        title: "Classic Leather Legacy",
+        price: 90,
         img: [
-            `https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/bb08902d326b43159e70ae550060d8f0_9366/Nano_X1_Adventure_Violeta_GY8442_01_standard.jpg`,
-            "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/040f5128a4344ee68973ae5500634a42_9366/Nano_X1_Adventure_Violeta_GY8442_03_standard.jpg",
-            "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ce52d7ceae2944fd8b0aae55005f9432_9366/Nano_X1_Adventure_Violeta_GY8442_04_standard.jpg",
+            `https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e1fed1eb44e147359eb7ac7c0144fc6d_9366/Classic_Leather_Legacy_Verde_FY7560_01_standard.jpg`,
+            "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/111f99deb9a745b6b1d6ac7c01415a8a_9366/Classic_Leather_Legacy_Verde_FY7560_03_standard.jpg",
+            "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/98acf76b776e4cd8927dac7c0148e661_9366/Classic_Leather_Legacy_Verde_FY7560_04_standard.jpg",
         ],
         description:
-            "Ya sea para hacer un entrenamiento boot camp en el parque o ejercicios con peso corporal en medio de la naturaleza, con esta zapatilla de training para mujer te divertirás más que nunca entrenando al aire libre. La espuma Floatride Energy en la puntera te proporciona una sensación ligera y una pisada reactiva. La suela con tacos pronunciados te garantiza agarre en los box jumps.",
+            "Toma nota. El estilo Reebok vintage envejece muy bien. Pero eso es algo que ya sabías. Simplemente mira esta zapatilla Reebok retro. En caso de que su look original con la parte superior de nobuk y tela no sea suficiente para ti, dale la vuelta y revisa el diseño de malla con la suela de caucho de color caramelo en contraste. No está mal, ¿no?",
+        units: 10,
+        sizes: "36, 37, 38, 39, 40, 41",
+        value: 0,
+    },
+    {
+        brand: "Reebok",
+        genre: "Woman",
+        title: "Club C 85 Vintage",
+        price: 110,
+        img: [
+            `https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/833fd67a367243989f55ae4c0017e4eb_9366/Club_C_85_Vintage_Blanco_GX3686_01_standard.jpg`,
+            "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/203b0bb1b8844a1ba420ae4c0018d37e_9366/Club_C_85_Vintage_Blanco_GX3686_03_standard.jpg",
+            "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/56905a8fd8004b23be7cae4c0016aadb_9366/Club_C_85_Vintage_Blanco_GX3686_04_standard.jpg",
+        ],
+        description:
+            "Simple y minimalista. Con este modelo inspirado en las pistas de tenis lucirás un look simple e impecable. Viene con detalles sutiles en contraste que aportan un toque elegante. La ventana con el logo Reebok y la Union Jack le infunde un look de la vieja escuela. La parte superior está hecha de piel suave y flexible.",
         units: 10,
         sizes: "36, 37, 38, 39, 40, 41",
         value: 0,

@@ -8,6 +8,8 @@ import {
     buyProduct,
     addFavProduct,
     addCommentary,
+    delFavProduct,
+    delCommentary,
 } from "../controller/user.controller.js";
 
 const router = express.Router();
@@ -19,5 +21,7 @@ router.get("/:id", getUserDetail);
 router.post("/buy/:id", [isAuth], buyProduct);
 router.post("/fav/:id", [isAuth], addFavProduct);
 router.post("/comment/:id", [isAuth], addCommentary);
+router.delete("/fav/:id", [isAuth], delFavProduct);
+router.delete("/comment/:id", [isAuth], delCommentary);
 
 export { router as userRouter };

@@ -36,9 +36,7 @@ const registerUser = async (req, res, next) => {
         return res.status(201).json({
             status: 201,
             message: "User registered successfully!",
-            data: {
-                id: newUser._id,
-            },
+            data: newUser,
         });
     } catch (error) {
         next(error);
@@ -118,13 +116,13 @@ const getUserDetail = async (req, res, next) => {
 const buyProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { productId } = req.body;
+        const { productId, quantity } = req.body;
 
         const product = await Product.findById(productId);
-        const units = product.units;
-        const value = product.value;
+        const units = product.units - parseInt(quantity);
+        const value = product.value + parseInt(quantity);
 
-        if (units > 0) {
+        if (product.units > 0) {
             await User.findByIdAndUpdate(id, {
                 $push: {
                     userBuys: product,
@@ -132,8 +130,8 @@ const buyProduct = async (req, res, next) => {
             });
 
             await Product.findByIdAndUpdate(productId, {
-                units: units--,
-                value: value++,
+                units: units,
+                value: value,
             });
 
             const userUpdated = await User.findById(id);
@@ -160,7 +158,7 @@ const addFavProduct = async (req, res, next) => {
         const { productId } = req.body;
 
         const product = await Product.findById(productId);
-        const value = product.value;
+        const value = product.value + 1;
 
         await User.findByIdAndUpdate(id, {
             $push: {
@@ -169,7 +167,7 @@ const addFavProduct = async (req, res, next) => {
         });
 
         await Product.findByIdAndUpdate(productId, {
-            value: value++,
+            value: value,
         });
 
         const userUpdated = await User.findById(id);
@@ -192,11 +190,12 @@ const addCommentary = async (req, res, next) => {
         const user = await User.findById(id);
         const newComment = new Commentary({
             content: content,
-            time: new Date(),
+            data: new Date(),
         });
         await newComment.save();
 
         const commentary = await Commentary.findById(newComment._id);
+
         await Commentary.findByIdAndUpdate(commentary._id, {
             $push: {
                 user: user,
@@ -221,6 +220,61 @@ const addCommentary = async (req, res, next) => {
     }
 };
 
+const delFavProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { productId } = req.body;
+
+        const product = await Product.findById(productId);
+        const value = product.value - 1;
+
+        await User.findByIdAndUpdate(id, {
+            $pull: {
+                userFavs: product._id,
+            },
+        });
+
+        await Product.findByIdAndUpdate(productId, {
+            value: value,
+        });
+
+        const userUpdated = await User.findById(id);
+
+        return res.status(200).json({
+            status: 200,
+            message: `Product deleted to the fav list by ${userUpdated.username}`,
+            data: userUpdated,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const delCommentary = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { productId } = req.body;
+
+        const commentary = await Commentary.findById(id);
+
+        await Product.findByIdAndUpdate(productId, {
+            $pull: {
+                comments: commentary._id,
+            },
+        });
+
+        const product = await Product.findById(productId);
+
+        res.status(201).json({
+            status: 201,
+            message: `Commentary deleted`,
+            data: product,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 export {
     registerUser,
     logInUser,
@@ -229,4 +283,6 @@ export {
     buyProduct,
     addFavProduct,
     addCommentary,
+    delFavProduct,
+    delCommentary,
 };

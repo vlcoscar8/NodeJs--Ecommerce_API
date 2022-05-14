@@ -7,12 +7,15 @@ import { connectDB } from "./config/db.js";
 import { homeRouter } from "./api/routes/home.router.js";
 import { productListRouter } from "./api/routes/product-list.router.js";
 import { productDetailRouter } from "./api/routes/product-detail.router.js";
+import { userRouter } from "./api/routes/user.router.js";
 
 dotenv.config();
 const server = express();
 const router = express.Router();
 const PORT = process.env.PORT;
 const DB_URL = process.env.DB_URL;
+
+server.set("secretKey", "nodeRestApi");
 
 server.use("/", router);
 server.use(express.json());
@@ -41,6 +44,7 @@ server.use(
 server.use("/home", homeRouter);
 server.use("/products", productListRouter);
 server.use("/product", productDetailRouter);
+server.use("/user", userRouter);
 
 // Errors
 server.use("*", (req, res, next) => {

@@ -45,12 +45,16 @@ server.use(
 // Router
 server.all("/", (req, res) => {
     res.send(`
-    <h1>Ecommerce api about sneakers done by Oscar Perez</h1>
-    <img src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/5a28e397-d083-4398-b0d9-a9911ae22018/react-infinity-run-flyknit-3-zapatillas-de-running-carretera-Pp5hlk.png"/>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+        <h1>Ecommerce api about sneakers done by Oscar Perez</h1>
+        <img src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/5a28e397-d083-4398-b0d9-a9911ae22018/react-infinity-run-flyknit-3-zapatillas-de-running-carretera-Pp5hlk.png" style="width: 300px"/>
 
-    <h2>Endpoints:</h2>
+        <h2>Endpoints:</h2>
 
-    <a href="/Home">Home</a>
+        <a href="/home" style="text-decoration: none">Home</a>
+        <a href="/products" style="text-decoration: none">Products list</a>
+
+    </div>
     `);
 });
 server.use("/home", homeRouter);

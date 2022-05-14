@@ -93,6 +93,12 @@ const swaggerSpec = {
     apis: [`./api/documentation/*.js`], // The file where the documentation is written
 };
 
+server.use(
+    "/api-doc",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerJsDoc(swaggerSpec))
+);
+
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

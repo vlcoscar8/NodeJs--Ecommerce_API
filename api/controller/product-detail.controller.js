@@ -2,16 +2,11 @@ import { Product } from "../models/product.schema.js";
 
 const getProductDetail = async (req, res, next) => {
     try {
-        const { genre, brand } = req.query;
+        const { id } = req.params;
 
-        const filter = {
-            ...(genre && { genre: genre }),
-            ...(brand && { brand: brand }),
-        };
+        const product = await Product.findById(id);
 
-        const products = await Product.find(filter);
-
-        res.status(200).json(products);
+        res.status(200).json(product);
     } catch (error) {
         next(error);
     }

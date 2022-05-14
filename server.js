@@ -57,3 +57,5 @@ server.use((error, req, res, next) => {
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
+export { DB_URL };

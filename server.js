@@ -9,14 +9,15 @@ import { productListRouter } from "./api/routes/product-list.router.js";
 import { productDetailRouter } from "./api/routes/product-detail.router.js";
 import { userRouter } from "./api/routes/user.router.js";
 
+// Variables
 dotenv.config();
 const server = express();
 const router = express.Router();
 const PORT = process.env.PORT;
 const DB_URL = process.env.DB_URL;
 
+// Configuration
 server.set("secretKey", "nodeRestApi");
-
 server.use("/", router);
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
@@ -41,6 +42,7 @@ server.use(
     })
 );
 
+// Router
 server.use("/home", homeRouter);
 server.use("/products", productListRouter);
 server.use("/product", productDetailRouter);

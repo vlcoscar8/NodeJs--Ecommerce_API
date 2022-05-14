@@ -43,6 +43,9 @@ server.use(
 );
 
 // Router
+server.all("/", (req, res) => {
+    res.send("Hello");
+});
 server.use("/home", homeRouter);
 server.use("/products", productListRouter);
 server.use("/product", productDetailRouter);

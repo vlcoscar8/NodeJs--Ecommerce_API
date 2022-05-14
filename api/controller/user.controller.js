@@ -275,6 +275,25 @@ const delCommentary = async (req, res, next) => {
     }
 };
 
+const editUser = async (req, res, next) => {
+    try {
+        const userBody = req.body;
+        const imageProfile = req.file_url;
+        const { id } = req.params;
+
+        await User.findByIdAndUpdate(id, {
+            img: imageProfile,
+            ...userBody,
+        });
+
+        const updatedUser = await User.findById(id);
+
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        return next(error);
+    }
+};
+
 export {
     registerUser,
     logInUser,
@@ -285,4 +304,5 @@ export {
     addCommentary,
     delFavProduct,
     delCommentary,
+    editUser,
 };

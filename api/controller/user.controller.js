@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { Product } from "../models/product.schema.js";
 import { User } from "../models/user.schema.js";
+import { Commentary } from "../models/comments.schema.js";
 
 const registerUser = async (req, res, next) => {
     try {
@@ -95,4 +97,136 @@ const logOutUser = async (req, res, next) => {
     }
 };
 
-export { registerUser, logInUser, logOutUser };
+const getUserDetail = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const user = await User.findById(id)
+            .populate("userBuys")
+            .populate("userFavs");
+
+        return res.status(200).json({
+            status: 200,
+            message: "User successfully finded",
+            data: user,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const buyProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { productId } = req.body;
+
+        const product = await Product.findById(productId);
+        const units = product.units;
+        const value = product.value;
+
+        if (units > 0) {
+            await User.findByIdAndUpdate(id, {
+                $push: {
+                    userBuys: product,
+                },
+            });
+
+            await Product.findByIdAndUpdate(productId, {
+                units: units--,
+                value: value++,
+            });
+
+            const userUpdated = await User.findById(id);
+
+            return res.status(200).json({
+                status: 200,
+                message: `Product bought by ${userUpdated.username}`,
+                data: userUpdated,
+            });
+        } else {
+            return res.status(200).json({
+                status: 200,
+                message: "The product is out of stock",
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+const addFavProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { productId } = req.body;
+
+        const product = await Product.findById(productId);
+        const value = product.value;
+
+        await User.findByIdAndUpdate(id, {
+            $push: {
+                userFavs: product,
+            },
+        });
+
+        await Product.findByIdAndUpdate(productId, {
+            value: value++,
+        });
+
+        const userUpdated = await User.findById(id);
+
+        return res.status(200).json({
+            status: 200,
+            message: `Product added to the fav list by ${userUpdated.username}`,
+            data: userUpdated,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const addCommentary = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { productId, content } = req.body;
+
+        const user = await User.findById(id);
+        const newComment = new Commentary({
+            content: content,
+            time: new Date(),
+        });
+        await newComment.save();
+
+        const commentary = await Commentary.findById(newComment._id);
+        await Commentary.findByIdAndUpdate(commentary._id, {
+            $push: {
+                user: user,
+            },
+        });
+
+        await Product.findByIdAndUpdate(productId, {
+            $push: {
+                comments: commentary,
+            },
+        });
+
+        const product = await Product.findById(productId);
+
+        res.status(201).json({
+            status: 201,
+            message: `Commentary created successfully by ${user.username}`,
+            data: product,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export {
+    registerUser,
+    logInUser,
+    logOutUser,
+    getUserDetail,
+    buyProduct,
+    addFavProduct,
+    addCommentary,
+};

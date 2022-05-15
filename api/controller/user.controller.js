@@ -150,7 +150,23 @@ const buyProduct = async (req, res, next) => {
                     : (isUnique = true);
             }
 
-            if (isUnique) {
+            if (shop[0].lastBuys.length <= 4 && isUnique) {
+                await Shop.findByIdAndUpdate(shopId, {
+                    $push: {
+                        lastBuys: product._id,
+                    },
+                });
+            } else if (shop[0].lastBuys.length > 4 && isUnique) {
+                const firstProduct = shop[0].lastBuys[0];
+
+                const productFinded = await Product.findById(firstProduct._id);
+
+                await Shop.findByIdAndUpdate(shopId, {
+                    $pull: {
+                        lastBuys: productFinded._id,
+                    },
+                });
+
                 await Shop.findByIdAndUpdate(shopId, {
                     $push: {
                         lastBuys: product._id,
@@ -159,31 +175,7 @@ const buyProduct = async (req, res, next) => {
             }
 
             //Get the product most valuated and introduce on the mostvaluated product of home
-            const products = await Product.find();
-
-            let mostValuated = [];
-
-            products.forEach((pro) => {
-                if (mostValuated.length === 0) {
-                    return mostValuated.push(pro);
-                }
-
-                mostValuated[0].value > pro.value
-                    ? mostValuated[0]
-                    : (mostValuated[0] = pro);
-            });
-
-            await Shop.findByIdAndUpdate(shopId, {
-                $set: {
-                    mostValuated: [],
-                },
-            });
-
-            await Shop.findByIdAndUpdate(shopId, {
-                $push: {
-                    mostValuated: mostValuated[0]._id,
-                },
-            });
+            mostValuatedProduct(shopId);
 
             return res.status(200).json({
                 status: 200,
@@ -220,6 +212,10 @@ const addFavProduct = async (req, res, next) => {
         });
 
         const userUpdated = await User.findById(id);
+
+        const shop = await Shop.find();
+        const shopId = shop[0]._id;
+        mostValuatedProduct(shopId);
 
         return res.status(200).json({
             status: 200,
@@ -258,6 +254,10 @@ const addCommentary = async (req, res, next) => {
         });
 
         const product = await Product.findById(productId);
+
+        const shop = await Shop.find();
+        const shopId = shop[0]._id;
+        mostCommentedProduct(shopId);
 
         res.status(201).json({
             status: 201,
@@ -341,6 +341,62 @@ const editUser = async (req, res, next) => {
     } catch (error) {
         return next(error);
     }
+};
+
+const mostValuatedProduct = async (shopId) => {
+    const products = await Product.find();
+
+    let mostValuated = [];
+
+    products.forEach((pro) => {
+        if (mostValuated.length === 0) {
+            return mostValuated.push(pro);
+        }
+
+        mostValuated[0].value > pro.value
+            ? mostValuated[0]
+            : (mostValuated[0] = pro);
+    });
+
+    await Shop.findByIdAndUpdate(shopId, {
+        $set: {
+            mostValuated: [],
+        },
+    });
+
+    await Shop.findByIdAndUpdate(shopId, {
+        $push: {
+            mostValuated: mostValuated[0]._id,
+        },
+    });
+};
+
+const mostCommentedProduct = async (shopId) => {
+    const products = await Product.find();
+
+    let mostCommented = [];
+
+    products.forEach((pro) => {
+        if (mostCommented.length === 0) {
+            return mostCommented.push(pro);
+        }
+
+        mostCommented[0].comments.length > pro.comments.length
+            ? mostCommented[0]
+            : (mostCommented[0] = pro);
+    });
+
+    await Shop.findByIdAndUpdate(shopId, {
+        $set: {
+            mostCommented: [],
+        },
+    });
+
+    await Shop.findByIdAndUpdate(shopId, {
+        $push: {
+            mostCommented: mostCommented[0]._id,
+        },
+    });
 };
 
 export {

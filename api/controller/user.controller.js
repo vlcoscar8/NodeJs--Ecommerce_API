@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { Product } from "../models/product.schema.js";
 import { User } from "../models/user.schema.js";
 import { Commentary } from "../models/comments.schema.js";
+import { Shop } from "../models/shop.schema.js";
 
 const registerUser = async (req, res, next) => {
     try {
@@ -135,6 +136,54 @@ const buyProduct = async (req, res, next) => {
             });
 
             const userUpdated = await User.findById(id);
+
+            // Introduce the product on the lasbuys products of home
+            const shop = await Shop.find().populate("lastBuys");
+            const shopId = shop[0]._id;
+
+            let isUnique = true;
+
+            for (let i = 0; i < shop[0].lastBuys.length; i++) {
+                shop[0].lastBuys[i] &&
+                shop[0].lastBuys[i].title === product.title
+                    ? (isUnique = false)
+                    : (isUnique = true);
+            }
+
+            if (isUnique) {
+                await Shop.findByIdAndUpdate(shopId, {
+                    $push: {
+                        lastBuys: product._id,
+                    },
+                });
+            }
+
+            //Get the product most valuated and introduce on the mostvaluated product of home
+            const products = await Product.find();
+
+            let mostValuated = [];
+
+            products.forEach((pro) => {
+                if (mostValuated.length === 0) {
+                    return mostValuated.push(pro);
+                }
+
+                mostValuated[0].value > pro.value
+                    ? mostValuated[0]
+                    : (mostValuated[0] = pro);
+            });
+
+            await Shop.findByIdAndUpdate(shopId, {
+                $set: {
+                    mostValuated: [],
+                },
+            });
+
+            await Shop.findByIdAndUpdate(shopId, {
+                $push: {
+                    mostValuated: mostValuated[0]._id,
+                },
+            });
 
             return res.status(200).json({
                 status: 200,

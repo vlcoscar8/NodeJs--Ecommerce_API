@@ -119,7 +119,7 @@ const buyProduct = async (req, res, next) => {
         const { id } = req.params;
         const { productId, quantity } = req.body;
 
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({ id: productId });
         const units = product.units - parseInt(quantity);
         const value = product.value + parseInt(quantity);
 
@@ -130,10 +130,13 @@ const buyProduct = async (req, res, next) => {
                 },
             });
 
-            await Product.findByIdAndUpdate(productId, {
-                units: units,
-                value: value,
-            });
+            await Product.findOne(
+                { id: productId },
+                {
+                    units: units,
+                    value: value,
+                }
+            );
 
             const userUpdated = await User.findById(id);
 
@@ -198,7 +201,7 @@ const addFavProduct = async (req, res, next) => {
         const { id } = req.params;
         const { productId } = req.body;
 
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({ id: productId });
         const value = product.value + 1;
 
         await User.findByIdAndUpdate(id, {
@@ -207,9 +210,12 @@ const addFavProduct = async (req, res, next) => {
             },
         });
 
-        await Product.findByIdAndUpdate(productId, {
-            value: value,
-        });
+        await Product.findOne(
+            { id: productId },
+            {
+                value: value,
+            }
+        );
 
         const userUpdated = await User.findById(id);
 
@@ -247,13 +253,16 @@ const addCommentary = async (req, res, next) => {
             },
         });
 
-        await Product.findByIdAndUpdate(productId, {
-            $push: {
-                comments: commentary,
-            },
-        });
+        await Product.findOne(
+            { id: productId },
+            {
+                $push: {
+                    comments: commentary,
+                },
+            }
+        );
 
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({ id: productId });
 
         const shop = await Shop.find();
         const shopId = shop[0]._id;
@@ -274,7 +283,7 @@ const delFavProduct = async (req, res, next) => {
         const { id } = req.params;
         const { productId } = req.body;
 
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({ id: productId });
         const value = product.value - 1;
 
         await User.findByIdAndUpdate(id, {
@@ -283,9 +292,12 @@ const delFavProduct = async (req, res, next) => {
             },
         });
 
-        await Product.findByIdAndUpdate(productId, {
-            value: value,
-        });
+        await Product.findOne(
+            { id: productId },
+            {
+                value: value,
+            }
+        );
 
         const userUpdated = await User.findById(id);
 
@@ -306,13 +318,16 @@ const delCommentary = async (req, res, next) => {
 
         const commentary = await Commentary.findById(id);
 
-        await Product.findByIdAndUpdate(productId, {
-            $pull: {
-                comments: commentary._id,
-            },
-        });
+        await Product.findOne(
+            { id: productId },
+            {
+                $pull: {
+                    comments: commentary._id,
+                },
+            }
+        );
 
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({ id: productId });
 
         res.status(201).json({
             status: 201,

@@ -63,6 +63,10 @@
  *          Product:
  *              type: object
  *              properties:
+ *                  id:
+ *                      type: integer
+ *                      description: The price of the product
+ *                      required: true
  *                  brand:
  *                      type: string
  *                      description: The brand name

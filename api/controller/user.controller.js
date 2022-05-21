@@ -4,6 +4,7 @@ import { Product } from "../models/product.schema.js";
 import { User } from "../models/user.schema.js";
 import { Commentary } from "../models/comments.schema.js";
 import { Shop } from "../models/shop.schema.js";
+import { ProductBought } from "../models/productBought.schema.js";
 
 const registerUser = async (req, res, next) => {
     try {
@@ -117,16 +118,39 @@ const getUserDetail = async (req, res, next) => {
 const buyProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { productId, quantity } = req.body;
+        const { productId, quantity, size } = req.body;
+
+        const productBought = new ProductBought({
+            productId: productId,
+            size: size,
+            units: quantity,
+        });
+
+        await productBought.save();
+
+        const newProductBought = await ProductBought.find({
+            productId: productId,
+            size: size,
+            units: quantity,
+        });
 
         const product = await Product.findOne({ id: productId });
         const units = product.units - parseInt(quantity);
         const value = product.value + parseInt(quantity);
 
+        await ProductBought.findOneAndUpdate(
+            { productId: productId },
+            {
+                $push: {
+                    product: product,
+                },
+            }
+        );
+
         if (product.units > 0) {
             await User.findByIdAndUpdate(id, {
                 $push: {
-                    userBuys: product,
+                    userBuys: newProductBought,
                 },
             });
 
@@ -140,7 +164,7 @@ const buyProduct = async (req, res, next) => {
 
             const userUpdated = await User.findById(id);
 
-            // Introduce the product on the lasbuys products of home
+            // Introduce the product on the lastbuys products of home
             const shop = await Shop.find().populate("lastBuys");
             const shopId = shop[0]._id;
 

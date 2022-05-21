@@ -13,7 +13,7 @@ const userSchema = new Schema({
     userBuys: [
         {
             type: mongoose.Types.ObjectId,
-            ref: "Product",
+            ref: "ProductBought",
         },
     ],
     userFavs: [

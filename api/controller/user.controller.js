@@ -277,7 +277,7 @@ const addCommentary = async (req, res, next) => {
             },
         });
 
-        await Product.findOne(
+        await Product.findOneAndUpdate(
             { id: productId },
             {
                 $push: {
@@ -287,6 +287,7 @@ const addCommentary = async (req, res, next) => {
         );
 
         const product = await Product.findOne({ id: productId });
+        console.log(product);
 
         const shop = await Shop.find();
         const shopId = shop[0]._id;
@@ -294,7 +295,7 @@ const addCommentary = async (req, res, next) => {
 
         res.status(201).json({
             status: 201,
-            message: `Commentary created successfully by ${user.username}`,
+            message: `OK`,
             data: product,
         });
     } catch (error) {
@@ -327,7 +328,7 @@ const delFavProduct = async (req, res, next) => {
 
         return res.status(200).json({
             status: 200,
-            message: `Product deleted to the fav list by ${userUpdated.username}`,
+            message: `Ok`,
             data: userUpdated,
         });
     } catch (error) {

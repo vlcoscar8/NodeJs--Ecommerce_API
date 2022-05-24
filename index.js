@@ -29,6 +29,8 @@ server.use(
         allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
+
+server.options("/user/", cors());
 server.use(
     session({
         secret: process.env.SESSION_SECRET,

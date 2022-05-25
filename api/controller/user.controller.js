@@ -56,10 +56,9 @@ const logInUser = async (req, res, next) => {
         );
 
         if (!user || !isValidPassword) {
-            const error = {
-                status: 401,
-                message: "The email or password is incorrect",
-            };
+            const error = "The email or password is incorrect";
+
+            return res.status(401).json(error);
         }
 
         const token = jwt.sign(

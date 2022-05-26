@@ -285,9 +285,9 @@ const addCommentary = async (req, res, next) => {
             }
         );
 
-        const product = await Product.findOne({ id: productId }).populate(
-            "comments"
-        );
+        const product = await Product.findOne({ id: productId })
+            .populate("comments")
+            .populate("user");
 
         const shop = await Shop.find();
         const shopId = shop[0]._id;
